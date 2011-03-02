@@ -235,25 +235,27 @@ function xmlEscape(str, acc) {
 // ## Utility functions
 
 // Apply a function to all the child elements of a given jsonml array.
-var childFold = exports.childFold = function(jsonml, fn, acc) {
+var childReduce = exports.childReduce = function(jsonml, fn, acc) {
     var first = jsonml[1];
     if(typeof(first) !== "object" || isArray(first)) {
-        acc = fn(first, acc);
+        acc = fn(acc, first);
     }
     for(var pos = 2; pos < jsonml.length; ++pos) {
-        acc = fn(jsonml[pos], acc);
+        acc = fn(acc, jsonml[pos]);
     }
     return acc;
 }
 
+/*
 // Apply a function on all the child elements, and append the result to an 
 // `acc`umulator array.
 exports.pushMappedChild = function(jsonml, fn, acc) {
-    return childFold(jsonml, function(elem, acc) {
+    return childReduce(jsonml, function(acc, elem) {
         acc.push(fn(elem));
         return acc;
     }, acc);
 }
+*/
 
 // Convert jsonml into an easier subscriptable json structure, not preserving 
 // the order of the elements

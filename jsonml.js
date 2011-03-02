@@ -10,6 +10,7 @@
 // Not depending on any libraries, and also
 // avoid regular expressions to be possible to 
 // run on javascript-subsets on j2me devices.
+(function (exports) {
 
 // ## XML parser
 
@@ -315,4 +316,4 @@ function isArray(a) {
     return toString.call(a) === '[object Array]';
 }
 
-
+})(exports);

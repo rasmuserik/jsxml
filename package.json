@@ -1,17 +1,12 @@
 {
   "name": "jsonml",
   "description": "utilities for parsing and working with jsonml in array form",
-  "version": "0.0.0",
   "repository": "git@github.com:rasmuserik/jsonml.git",
-  "author": "Rasmus Erik .com",
-  "main": "jsonml",
-  "directories": {
-    "lib": "./lib"
-  },
-  "scripts": {
-    "test": "vows test/* --spec"
-  },
-  "engines": {
-    "node": "*"
-  }
+  "url": "http://github.com/rasmuserik/jsonml/",
+  "keywords": ["jsonml", "json", "xml"],
+  "author": "Rasmus Erik Voel Jensen (rasmuserik.com)",
+  "main": "jsonml.js",
+  "lib": ".",
+  "scripts": { "test": "vows test/* --spec" },
+  "version": "0.0.0"
 }

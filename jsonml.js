@@ -246,17 +246,21 @@ var childReduce = exports.childReduce = function(jsonml, fn, acc) {
     return acc;
 }
 
-/*
-// Apply a function on all the child elements, and append the result to an 
-// `acc`umulator array.
-exports.pushMappedChild = function(jsonml, fn, acc) {
-    return childReduce(jsonml, function(acc, elem) {
-        acc.push(fn(elem));
-        return acc;
-    }, acc);
+// - `jsonml.ensureAttributeObject(jsonml_array)` changes an jsonml array such that it has a (possibly empty) attribute object at position 1
+exports.ensureAttributeObject(jsonml) {
+    if(typeof jsonml[1] !== "object" || jsonml[1].constructor === Array) {
+        jsonml.unshift(jsonml[0]);
+        jsonml[1] = {};
+    }
 }
-*/
 
+exports.getAttr(jsonml, attribute) {
+    if(typeof jsonml[1] !== "object" || jsonml[1].constructor === Array) {
+        return undefined;
+    } else {
+        return jsonml[1][attribute];
+    }
+}
 // Convert jsonml into an easier subscriptable json structure, not preserving 
 // the order of the elements
 exports.toObject = function(jsonml) {

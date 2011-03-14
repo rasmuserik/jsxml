@@ -247,14 +247,14 @@ var childReduce = exports.childReduce = function(jsonml, fn, acc) {
 }
 
 // - `jsonml.ensureAttributeObject(jsonml_array)` changes an jsonml array such that it has a (possibly empty) attribute object at position 1
-exports.ensureAttributeObject function(jsonml) {
+exports.ensureAttributeObject = function(jsonml) {
     if(typeof jsonml[1] !== "object" || jsonml[1].constructor === Array) {
         jsonml.unshift(jsonml[0]);
         jsonml[1] = {};
     }
 }
 
-exports.getAttr function(jsonml, attribute) {
+exports.getAttr = function(jsonml, attribute) {
     if(typeof jsonml[1] !== "object" || jsonml[1].constructor === Array) {
         return undefined;
     } else {

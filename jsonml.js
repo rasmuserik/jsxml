@@ -158,7 +158,7 @@ exports.fromXml = function(xml) {
 exports.toXml = function(jsonml) {
     var acc = [];
     toXmlAcc(jsonml, acc);
-    return "blah " + acc.join('');
+    return acc.join('');
 }
 
 // The actual implementation. As the XML-string is built by appending to the 

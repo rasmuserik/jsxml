@@ -59,8 +59,7 @@ exports.fromXml = function(xml) {
                 } else {
                     c = entities[entity];
                     if(!c) {
-                        JsonML_Error("error: unrecognisable xml entity: " 
-                                     + entity);
+                        JsonML_Error("error: unrecognisable xml entity: " + entity);
                     }
                 }
             } 
@@ -82,7 +81,7 @@ exports.fromXml = function(xml) {
                     pos += 3;
                     while(xml.slice(pos, pos+2) !== "--") {
                         ++pos;
-                    };
+                    }
                 } 
                 read_until('>');
                 next_char();
@@ -93,9 +92,9 @@ exports.fromXml = function(xml) {
                 var newtag = [read_until(whitespace+">/")];
 
                 // read attributes
-                var attributes = {}
+                var attributes = {};
                 var has_attributes = 0;
-                while(c && is_a(whitespace)) { next_char(); };
+                while(c && is_a(whitespace)) { next_char(); }
                 while(c && !is_a(">/")) {
                     has_attributes = 1;
                     var attr = read_until(whitespace + "=>");
@@ -104,11 +103,11 @@ exports.fromXml = function(xml) {
                         var value_terminator = whitespace+">/";
                         if(is_a('"\'')) { value_terminator = c; next_char(); }
                         attributes[attr] = read_until(value_terminator);
-                        if(is_a('"\'')) next_char();
+                        if(is_a('"\'')) { next_char(); }
                     } else {
                         JsonML_Error("something not attribute in tag");
                     }
-                    while(c && is_a(whitespace)) { next_char(); };
+                    while(c && is_a(whitespace)) { next_char(); }
                 }
                 if(has_attributes) { newtag.push(attributes); }
 
@@ -133,8 +132,7 @@ exports.fromXml = function(xml) {
                 }
                 next_char();
                 var parent_tag = stack.pop();
-                if(tag.length <= 2 && !isArray(tag[1]) 
-                                   && typeof(tag[1]) !== "string") {
+                if(tag.length <= 2 && !isArray(tag[1]) && typeof(tag[1]) !== "string") {
                     tag.push("");
                 }
                 parent_tag.push(tag);
@@ -148,7 +146,7 @@ exports.fromXml = function(xml) {
         }
     }
     return tag;
-}
+};
 
 
 
@@ -159,7 +157,7 @@ exports.toXml = function(jsonml) {
     var acc = [];
     toXmlAcc(jsonml, acc);
     return acc.join('');
-}
+};
 
 // The actual implementation. As the XML-string is built by appending to the 
 // `acc`umulator.
@@ -169,23 +167,22 @@ function toXmlAcc(jsonml, acc) {
         acc.push(jsonml[0]);
         var pos = 1;
         var attributes = jsonml[1];
-        if(attributes && !isArray(attributes) 
-                      && typeof(attributes) !== "string") {
-            for(var key in attributes) {
+        if(attributes && !isArray(attributes) && typeof(attributes) !== "string") {
+            for(var key in attributes) { if(attributes.hasOwnProperty(key)) {
                 acc.push(' ');
                 acc.push(key);
                 acc.push('="');
                 xmlEscape(attributes[key], acc);
                 acc.push('"');
-            }
+            } }
             ++pos;
         }
         if(pos < jsonml.length) {
             acc.push(">");
-            {do {
+            do {
                 toXmlAcc(jsonml[pos], acc);
                 ++pos;
-            } while(pos < jsonml.length); }
+            } while(pos < jsonml.length); 
             acc.push("</");
             acc.push(jsonml[0]);
             acc.push(">");
@@ -209,9 +206,9 @@ var entities = {
 // Generate a reverse xml entity table.
 var reventities = (function () {
     var result = {};
-    for(var key in entities) {
+    for(var key in entities) { if(entities.hasOwnProperty(key)) {
         result[entities[key]] = key;
-    }
+    } }
     return result;
 })();
 
@@ -244,7 +241,7 @@ var childReduce = exports.childReduce = function(jsonml, fn, acc) {
         acc = fn(acc, jsonml[pos]);
     }
     return acc;
-}
+};
 
 // - `jsonml.ensureAttributeObject(jsonml_array)` changes an jsonml array such that it has a (possibly empty) attribute object at position 1
 exports.ensureAttributeObject = function(jsonml) {
@@ -252,7 +249,7 @@ exports.ensureAttributeObject = function(jsonml) {
         jsonml.unshift(jsonml[0]);
         jsonml[1] = {};
     }
-}
+};
 
 exports.getAttr = function(jsonml, attribute) {
     if(typeof jsonml[1] !== "object" || jsonml[1].constructor === Array) {
@@ -260,14 +257,14 @@ exports.getAttr = function(jsonml, attribute) {
     } else {
         return jsonml[1][attribute];
     }
-}
+};
 // Convert jsonml into an easier subscriptable json structure, not preserving 
 // the order of the elements
 exports.toObject = function(jsonml) {
     var result = {};
     result[jsonml[0]] = toObjectInner(jsonml);
     return result; 
-}
+};
 
 // Internal function called by toObject. Return an object corresponding to 
 // the child nodes of the `jsonml`-parameter
@@ -276,9 +273,9 @@ function toObjectInner(jsonml) {
     var attr = jsonml[1];
     var pos;
     if(typeof(attr) === "object" && !isArray(attr)) {
-        for(var key in attr) {
+        for(var key in attr) { if(attr.hasOwnProperty(key)) {
             result["@" + key] = attr[key];
-        }
+        } }
         pos = 2;
     } else {
         pos = 1;
@@ -296,7 +293,7 @@ function toObjectInner(jsonml) {
         ++pos;
     }
     return result;
-};
+}
 
 // Add a property to the object. If the property is already there, append 
 // the `val`ue to an array at the key instead, possibly putting existing 

@@ -158,7 +158,7 @@ exports.fromXml = function(xml) {
 exports.toXml = function(jsonml) {
     var acc = [];
     toXmlAcc(jsonml, acc);
-    return acc.join('');
+    return "blah " + acc.join('');
 }
 
 // The actual implementation. As the XML-string is built by appending to the 
@@ -319,7 +319,7 @@ function JsonML_Error(desc) {
 
 // Array check, implemented here to avoid depending on any library
 function isArray(a) {
-    return toString.call(a) === '[object Array]';
+    return a !== null && typeof(a) === "object"  && a.constructor === Array;
 }
 
 })(exports);

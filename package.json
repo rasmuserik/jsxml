@@ -1,12 +1,19 @@
 {
-  "name": "jsonml",
-  "description": "utilities for parsing and working with jsonml in array form",
-  "repository": "git@github.com:rasmuserik/jsonml.git",
-  "url": "http://github.com/rasmuserik/jsonml/",
-  "keywords": ["jsonml", "json", "xml"],
+  "name": "jsxml",
+  "description": "javascript utilities for working xml, mainly in jsonml in array form",
+  "version": "0.0.1",
+  "keywords": ["jsonml", "json", "xml", "html", "entities", "escape"],
+  "maintainers":[{"name": "Rasmus Erik Voel Jensen", "web": "http://solsort.dk"}],
+  "contributors":[{"name": "Rasmus Erik Voel Jensen", "web": "http://solsort.dk"}],
+  "licenses": [{"type": "MIT", "url": "http://www.opensource.org/licenses/MIT"}],
+  "repositories": [{"type": "git", "url": "git@github.com:rasmuserik/jsxml.git"}],
+  "dependencies": [],
+  "homepage": "http://github.com/rasmuserik/jsxml/",
   "author": "Rasmus Erik Voel Jensen (rasmuserik.com)",
-  "main": "jsonml.js",
-  "lib": ".",
-  "scripts": { "test": "vows test/* --spec" },
-  "version": "0.0.0"
+  "main": "lib/jsxml.js",
+  "ender": "lib/jsxml.js",
+  "scripts": { 
+    "doc": "docco lib/jsxml.js",
+    "test": "node test/test.js" 
+  }
 }

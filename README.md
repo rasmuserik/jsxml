@@ -1,4 +1,4 @@
-# Jsxml
+# ![logo](https://solsort.com/_logo.png) Jsxml
 JavaScript utilities for parsing and working xml, mainly in jsonml in array form.
 
 More info on JsonML at [jsonml.org](http://jsonml.org/) and [wikipedia](http://en.wikipedia.org/wiki/JsonML)

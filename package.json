@@ -1,7 +1,7 @@
 {
   "name": "jsxml",
   "description": "javascript utilities for working xml, mainly in jsonml in array form",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": ["jsonml", "json", "xml", "html", "entities", "escape"],
   "maintainers":[{"name": "Rasmus Erik Voel Jensen", "web": "http://solsort.dk"}],
   "contributors":[{"name": "Rasmus Erik Voel Jensen", "web": "http://solsort.dk"}],

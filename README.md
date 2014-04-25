@@ -12,3 +12,26 @@ This module implements the following functions:
 - `jsxml.getAttr(jsxml_array, attribute)` retrieves the value of a given attribute of the jsonml array or undefined if no attributes, or no attributes defined
 
 Released under open source / MIT license
+
+## Install
+
+```
+npm install jsxml
+```
+
+## Example
+
+```node
+node
+> var jsxml = require('jsxml');
+> 
+> // get jsonml value 
+> // (note: fromXml returns an array of parse fragments.)
+> console.log(jsxml.fromXml('<foo>bar</foo>')[0])
+[ 'foo', 'bar' ]
+
+> // get xml value
+> console.log(jsxml.toXml(['foo', 'bar']))
+<foo>bar</foo>
+```
+
